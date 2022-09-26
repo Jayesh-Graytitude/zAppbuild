@@ -96,7 +96,10 @@ if (props.error)
 //********************************************************************
 
 def initializeBuildProcess(String[] args) {
-	if (props.verbose) println "** Initializing build process . . ."
+//Jayesh - Start	
+//	if (props.verbose) println "** Initializing build process . . ."
+	println "** Initializing build process . . ."
+//Jayesh-End	
 
 	// build properties initial set
 	populateBuildProperties(args)
@@ -262,6 +265,9 @@ options:
 def populateBuildProperties(String[] args) {
 
 	// parse incoming options and arguments
+	//Jayesh - Start
+	println "** Jayesh-Inside populateBuildProperties . . ."
+	//Jayesh-End
 	def opts = parseArgs(args)
 	def zAppBuildDir =  getScriptDir()
 	props.zAppBuildDir = zAppBuildDir
@@ -279,11 +285,17 @@ def populateBuildProperties(String[] args) {
 
 	// load build.properties
 	def buildConf = "${zAppBuildDir}/build-conf"
+	//Jayesh - Start
+	println "** Jayesh - buildConf - $buildConf "
+	//Jayesh-End
 	props.load(new File("${buildConf}/build.properties"))
 
 	// load additional build property files
 	if (props.buildPropFiles) {
 		String[] buildPropFiles = props.buildPropFiles.split(',')
+		//Jayesh - Start
+		println "** Jayesh-Inside LoadBuildProperties . . ."
+		//Jayesh-End
 		buildPropFiles.each { propFile ->
 			if (!propFile.startsWith('/'))
 				propFile = "${buildConf}/${propFile}"
